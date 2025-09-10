@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x] # 可以改为 [14.x] 或 [16.x] 等，以适应你的环境
+        node-version: [16.x] # 可以改为 [14.x] 或 [16.x] 等，以适应你的环境
 
     steps:
     - name: Checkout repository
