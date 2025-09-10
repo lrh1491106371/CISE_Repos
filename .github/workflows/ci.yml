@@ -1,0 +1,35 @@
+name: CI_action
+
+on:
+  push:
+    branches: [main] # 当代码推送到main分支时触发
+  pull_request:
+    branches: [main] # 当有针对main分支的拉取请求时触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x] # 可以改为 [14.x] 或 [16.x] 等，以适应你的环境
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./worksheet2/my-react-app # 指定工作目录为前端项目
+
+    - name: Run the tests
+      run: npm test
+      working-directory: ./worksheet2/my-react-app # 指定工作目录为前端项目
+
+    - name: Build
+      run: npm run build
+      working-directory: ./worksheet2/my-react-app # 指定工作目录为前端项目
